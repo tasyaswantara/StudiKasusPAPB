@@ -94,7 +94,7 @@ fun ItemDetailsScreen(
             }
         }, modifier = modifier
     ) { innerPadding ->
-        ItemDetailsBody(
+        ItemDetailsBody( // menambahkan body form
             itemDetailsUiState = ItemDetailsUiState(),
             onSellItem = { },
             onDelete = { },
@@ -110,11 +110,11 @@ fun ItemDetailsScreen(
 }
 
 @Composable
-private fun ItemDetailsBody(
-    itemDetailsUiState: ItemDetailsUiState,
-    onSellItem: () -> Unit,
-    onDelete: () -> Unit,
-    modifier: Modifier = Modifier
+private fun ItemDetailsBody( //fungsi detail body
+    itemDetailsUiState: ItemDetailsUiState, // Status UI detail item
+    onSellItem: () -> Unit, // Aksi untuk jual item
+    onDelete: () -> Unit, // Aksi untuk hapus item
+    modifier: Modifier = Modifier // Modifier default
 ) {
     Column(
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
@@ -217,23 +217,16 @@ private fun ItemDetailsRow(
 }
 
 @Composable
-private fun DeleteConfirmationDialog(
-    onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, modifier: Modifier = Modifier
+private fun DeleteConfirmationDialog( // Dialog konfirmasi penghapusan
+    onDeleteConfirm: () -> Unit, onDeleteCancel: () -> Unit, modifier: Modifier = Modifier // Aksi dialog
 ) {
-    AlertDialog(onDismissRequest = { /* Do nothing */ },
-        title = { Text(stringResource(R.string.attention)) },
-        text = { Text(stringResource(R.string.delete_question)) },
-        modifier = modifier,
-        dismissButton = {
-            TextButton(onClick = onDeleteCancel) {
-                Text(stringResource(R.string.no))
-            }
-        },
-        confirmButton = {
-            TextButton(onClick = onDeleteConfirm) {
-                Text(stringResource(R.string.yes))
-            }
-        })
+    AlertDialog(onDismissRequest = { /* Tidak ada aksi */ }, // Dismis dialog
+        title = { Text(stringResource(R.string.attention)) }, // Judul dialog
+        text = { Text(stringResource(R.string.delete_question)) }, // Teks pertanyaan hapus
+        modifier = modifier, // Modifier dialog
+        dismissButton = { TextButton(onClick = onDeleteCancel) { Text(stringResource(R.string.no)) } }, // Tombol batal
+        confirmButton = { TextButton(onClick = onDeleteConfirm) { Text(stringResource(R.string.yes)) } } // Tombol konfirmasi
+    )
 }
 
 @Preview(showBackground = true)
